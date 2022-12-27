@@ -1,0 +1,27 @@
+﻿@model deneme123.Models.Image
+@{
+    ViewData["Title"] = "DeadImage";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+
+<h1>DeadImage</h1>
+
+<form asp-action="DeadImage" method="post" class="m-5" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Vefat Adı</label>
+        <input type="text" class="form-control" asp-for="VefatAd" required>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Vefat Soyad</label>
+        <input type="text" class="form-control" asp-for="VefatSoyad" required>
+    </div>
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Resim</label>
+        <input type="file" id="files" class="form-control" asp-for="Picture" required>
+    </div>
+    
+    <div class="d-grid gap-2 col-6 m-5 mx-auto">
+        <button class="btn btn-primary" type="submit" value="sumbit">Resim Ekle</button>
+    </div>
+</form>

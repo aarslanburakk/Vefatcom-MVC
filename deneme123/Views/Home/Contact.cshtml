@@ -1,0 +1,94 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = "İletişim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Raw(ViewResultExtensions.ViewResult(ViewBag.Result))
+
+
+<section class="mb-4">
+
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Bize Ulaşın</h2>
+
+    <p class="text-center w-responsive mx-auto mb-5">Sormak İstediğin Birşey mi var ? Lütfen Bizimle İletişime Geçmekten Çekinmeyin.Bütün Sorularınızı Önerilierinizi Ve İsteklerinizi Sunabilirsiniz. Ekibimiz Birkaç Saat İçinde Sizlere Dönecektir.</p>
+
+    <div class="row">
+
+        <div class="col-md-9 mb-md-0 mb-5">
+
+            <form method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label class="form-label" asp-for="@Model.İsim">İsim Soyisim</label>
+                            <input asp-for="@Model.İsim" class="form-control" id="name" type="text" placeholder="İsim Soyisim" required />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">İsim Soyisim Gerekli.</div>
+                        </div>
+                    </div>
+
+                    <!-- Email address input -->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label asp-for="@Model.Email" class="form-label" for="emailAddress" >Email Adres</label>
+                            <input asp-for="@Model.Email" class="form-control" id="emailAddress" type="email" placeholder="Email Adres" required />
+                            <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Adres Giriniz.</div>
+                            <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Adres Geçersiz.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label class="form-label" asp-for="@Model.Subject">Konu</label>
+                            <input asp-for="@Model.Subject" class="form-control" id="name" type="text" placeholder="Konu" required />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Konu Girizin.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label asp-for="@Model.Message class=" form-label" for="message">Mesajınız</label>
+                            <textarea asp-for="@Model.Message" class="form-control" id="message" type="text" placeholder="Mesaj" style="height: 10rem;" required></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Message is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form submit button -->
+                <div class="d-grid">
+                    <button class="btn btn-primary btn-lg m-5" type="submit">Gönder</button>
+                </div>
+            </form>
+            <div class="status"></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <i class="fas fa-map-marker-alt fa-2x"></i>
+                    <p>Türkiye Kuşadası/AYDIN</p>
+                </li>
+
+              @*  <li>
+                    <i class="fas fa-phone mt-4 fa-2x"></i>
+                    <p>+ 01 234 567 89</p>
+                </li>*@
+
+                <li>
+                    <i class="fas fa-envelope mt-4 fa-2x"></i>
+                    <p>destek@ve-fat.com</p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+</section>
+
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script src="https://kit.fontawesome.com/14f6736222.js" crossorigin="anonymous"></script>

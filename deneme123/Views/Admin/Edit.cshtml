@@ -1,0 +1,46 @@
+﻿@model Dead
+@{
+    ViewData["Title"] = "Vefat Güncelle";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+
+
+
+<form asp-action="Edit" method="post">
+
+    <div class="form-group">
+        <label asp-for="Id">Vefat ID</label>
+        <input asp-for="Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DeadNameUsername">Vefat İsim Soyisim</label>
+        <input asp-for="DeadNameUsername" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CityId">Vefat Yeri</label>
+        <select asp-for="CityId" asp-items="@(new SelectList(@ViewBag.listofcity,"CityId","CityName"))" class="form-control"></select>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="DeadAge">Vefat Yaşı</label>
+        <input asp-for="DeadAge" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DeadDate">Vefat Tarihi</label>
+        <input type="date" asp-for="DeadDate" class="form-control " />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserId">İlanı Veren Id</label>
+        <input asp-for="UserId" class="form-control " />
+    </div>
+    <div class="form-group">
+        <label asp-for="isActive">Aktif Et</label>
+        <input type="checkbox" asp-for="isActive" />
+    </div>
+    <input type="hidden" asp-for="DeadImage" class="form-control " />
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+
+
+</form>

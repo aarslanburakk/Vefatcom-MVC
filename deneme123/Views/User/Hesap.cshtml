@@ -1,0 +1,157 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Hesap";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    string fullname = Context.Session.GetString("fullname");
+    string email = Context.Session.GetString("email");
+}
+<link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+
+<section style="background-color: #eee;">
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item breadcrumb-item active" aria-current="page">
+                                    Kullanıcı Profili
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" >Düzenle</button>
+                              
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Profil Düzenle</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                        <input type="text" class="form-control" id="recipient-name">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="message-text" class="col-form-label">Message:</label>
+                                                        <textarea class="form-control" id="message-text"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Send message</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@fullname</h5>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">İsim Soysim</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@fullname</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row text-center">
+                <h1>İlanlarım</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="table-responsivem m-2" style="width:100%">
+    <table class="table table-bordered table-striped border-dark ">
+        <thead style="background-color:#2E5F75">
+            <tr class="text-center">
+
+                <th>İlan No</th>
+                <th>Ad Soyad</th>
+                <th style="width:100px">Vefat Yaşı</th>
+                <th>Vefat Yeri</th>
+                <th>Vefat Tarihi</th>
+                <th>İlan Durumu</th>
+
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.Deads)
+        {
+
+
+            <tr class="text-center">
+
+
+                <td>@item.Id</td>
+                <td>
+                    @if (item.isActive == true)
+                    {
+                        <a asp-action="DeadComment" asp-route-id="@item.Id">@item.DeadNameUsername.ToUpper()</a>
+                    }
+                    else
+                    {
+                        @item.DeadNameUsername.ToUpper()
+                    }
+                </td>
+                <td>@item.DeadAge  </td>
+                <td>@item.City.CityName </td>
+                <td>@item.DeadDate  </td>
+                <td>
+                    @if (item.isActive == true)
+                    {
+                        <span class="badge rounded-pill bg-success">İlan Yayında</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning rounded-pill  text-dark">Onay Bekliyor</span>
+                    }
+                </td>
+
+
+            </tr>
+
+
+        }
+
+    </table>
+</div>

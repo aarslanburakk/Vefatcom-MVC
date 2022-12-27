@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Dead>
+@{
+
+    ViewData["Title"] = "Vefat Sil Ve Güncelle";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+
+
+<div class="m-5">
+
+    <div class="bg-success text-white m-5 p-4">
+        <h2>Vefatlarımız</h2>
+    </div>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    <th>Ad Soyad</th>
+                    <th>Vefat Yaşı</th>
+                    <th>Vefat Yeri</th>
+                    <th>Vefat Tarihi</th>
+                    <th>İlanı Veren Id</th>
+                    <th>Onay Kuttusu</th>
+
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+
+                    <td>@item.DeadNameUsername.ToUpper()  </td>
+                    <td>@item.DeadAge  </td>
+                    <td>@item.City.CityName </td>
+                    <td>@item.DeadDate  </td>
+                    <td>@item.UserId  </td>
+                    <td>                     
+                         
+                        @if (item.isActive == true)
+                        {
+                            <span class="badge rounded-pill bg-success">İlan Yayında</span>
+                        }
+                        else
+                        {
+                      <span class="badge bg-warning rounded-pill  text-dark">Onay Bekliyor</span>
+                        }
+                       
+                       
+                    </td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Güncelle</a>
+                            
+                          <input type="hidden" name="id" value="@item.Id" />
+                            @*<button type="submit" class="btn btn-danger btn-sm">Sil</button>*@
+                            <!-- Button trigger modal -->
+                            <button type="submit" onclick="return confirm('Silmek İstediğinden Emin Misin ?  @item.DeadNameUsername') " class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Sil
+                            </button>
+                            
+                            @*<!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Vefat Sil</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Gerçekten Silmek İstiyor musun ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-primary">Sil</button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </form>
+                    </td>
+
+
+                </tr>
+
+
+            }
+
+        </table>
+    </div>
+</div>

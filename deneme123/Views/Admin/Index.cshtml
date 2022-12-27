@@ -1,0 +1,92 @@
+﻿@model IPagedList<Dead>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@{
+    ViewData["Title"] = "Vefat Bilgi Paylaşım Sitesi";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+<link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+
+@await Component.InvokeAsync("Image")
+
+ <div class="m-3 ">
+
+        <div class=" text-black m-2 p-2 text-center">
+            <h2>Vefatlarımız</h2>
+        </div>
+        <div class=" text-center  p-4 ">
+            <form method="get" id="ara">
+
+                <div class="input-group d-flex justify-content-center">
+                    <div class="box m-1">
+                        <input type="text" name="name" class="form-control" placeholder="Vefat Ad Soyad" aria-label="Vefat Arama" aria-describedby="basic-addon2" value="@ViewBag.Name">
+
+                    </div>
+                    <div class="box m-1">
+                        <input type="text" name="age" class="form-control" placeholder="Vefat Yaşı" aria-label="Vefat Arama" aria-describedby="basic-addon2" value="@ViewBag.Age">
+                    </div>
+                    <div class="box m-1">
+                        <input type="date" name="date" class="form-control" placeholder="Vefat Tarihi" aria-label="Vefat Arama" aria-describedby="basic-addon2" value="@ViewBag.Date">
+                    </div>
+                    <div class="box m-1">
+                        <button class="btn btn-secondary" style="width:100px;">Ara</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+<div class="d-flex justify-content-center">
+    <div class="">
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new {page} ),new PagedListRenderOptions{
+        LiElementClasses=new List<string>
+        {"page-link"}
+        })
+    </div>
+</div>
+<div class="m-10">
+    <div class="d-flex">
+        <div class="m-2">
+            @await Component.InvokeAsync("CityList")
+
+        </div>
+
+        <div class="table-responsivem m-2" style="width:1200px">
+            <table class="table table-bordered table-striped border-dark ">
+                <thead style="background-color:#2E5F75">
+                    <tr class="text-center">
+
+                        <th>Ad Soyad</th>
+                        <th style="width:100px">Vefat Yaşı</th>
+                        <th>Vefat Yeri</th>
+                        <th>Vefat Tarihi</th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+
+
+                    <tr class="text-center">
+
+
+                        <td>
+                            <a asp-action="DeadComment" asp-route-id="@item.Id">@item.DeadNameUsername.ToUpper()</a>
+
+                        </td>
+                        <td>@item.DeadAge  </td>
+                        <td>@item.City.CityName </td>
+                        <td>@item.DeadDate  </td>
+
+                    </tr>
+
+
+                }
+
+            </table>
+        </div>
+
+    </div>
+</div>

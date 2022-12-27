@@ -1,0 +1,42 @@
+﻿@model Comment
+@{
+    ViewData["Title"] = "Yorum Güncelle";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+
+
+
+<form asp-action="CommentEdit" method="post">
+
+     
+    
+    <div class="form-group">
+        <label asp-for="CommentID">Yorum ID</label>
+        <input asp-for="CommentID" class="form-control" />
+    </div> 
+    <div class="form-group">
+        <label asp-for="CommentUser">Yorumu Yapan</label>
+        <input asp-for="CommentUser" class="form-control" />
+    </div> 
+    <div class="form-group">
+        <label asp-for="CommentDate">Yorum Tarihi</label>
+        <input asp-for="CommentDate" class="form-control" />
+    </div> 
+    <div class="form-group">
+        <label asp-for="DeadID">Vefat ID</label>
+        <input asp-for="DeadID" class="form-control" />
+    </div>  
+    <div class="form-group">
+        <label asp-for="CommentContent">Yorum</label>
+        <input asp-for="CommentContent" class="form-control" />
+    </div> 
+    <div class="form-group">
+        <label asp-for="CommentİsActive">Aktif Et</label>
+        <input type="checkbox" asp-for="CommentİsActive" />
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+
+
+</form>

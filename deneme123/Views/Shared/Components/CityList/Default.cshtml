@@ -1,0 +1,18 @@
+﻿@model IEnumerable<City>
+
+@{
+}
+
+
+
+
+
+<div class="list-group" >
+
+    <a href="/Home/Index" value="@ViewBag.CityId" class="list-group-item list-group-item-action list-group-item-dark">Tüm Şehirler</a>
+    @foreach (var item in Model)
+    {
+        <a class="list-group-item list-group-item-action list-group-item-dark" href="?item=@item.CityId" value="@ViewBag.CityId">@item.CityName</a>
+    }
+
+</div>

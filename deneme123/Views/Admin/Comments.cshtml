@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Comment>
+@{
+
+    ViewData["Title"] = "Vefat Yorum Sil Ve Güncelle";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+}
+
+
+<div class="m-5">
+
+    <div class="bg-success text-white m-5 p-4 text-center">
+        <h2>VEFAT YORUMLAR</h2>
+    </div>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    <th>Yorum ID</th>
+                    <th>Yorum Yazı</th>                 
+                    <th>Yorum Veren</th>                  
+                    <th>Onay Kuttusu</th>
+
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+
+                    <td>@item.CommentID  </td>
+                    <td>@item.CommentContent  </td>
+                    <td>@item.CommentUser </td>                                                                                                                              
+                                                                    
+                    <td>                     
+                         
+                        @if (item.CommentİsActive == true)
+                        {
+                            <span class="badge rounded-pill bg-success">İlan Yayında</span>
+                        }
+                        else
+                        {
+                      <span class="badge bg-warning rounded-pill  text-dark">Onay Bekliyor</span>
+                        }
+                       
+                       
+                    </td>
+                    <td>
+                        <form asp-action="CommentDelete" method="post">
+                            <a asp-action="CommentEdit" asp-route-id="@item.CommentID" class="btn btn-primary btn-sm">Güncelle</a>
+                            
+                            <input type="hidden" name="id" value="@item.CommentID" />
+                            <button type="submit"  onclick="return confirm('Silmek İstediğinden Emin Misin ?') " class="btn btn-danger btn-sm">Sil</button>
+                            
+                        </form>
+                    </td>
+
+
+                </tr>
+
+
+            }
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Vefat.com</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/deneme123.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/favicon.ico" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/limonte-sweetalert2/sweetalert2.min.css" asp-append-version="true" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+</head>
+
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">VE-FAT.COM</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="AddDead">VEFAT iLANI VER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">İLETİŞİM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " tabindex="-1" aria-disabled="true" asp-area="" asp-controller="Home" asp-action="About">HAKKIMIZDA</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Register">Üye Ol</a>
+                        <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Login">Giriş Yap</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="container ">
+        <script src="~/lib/limonte-sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+        <main role="main" class="pb-3">
+
+
+            @RenderBody()
+        </main>
+    </div>
+    
+    <footer class="border-top footer text-muted bg-light ">
+        <div class="container bg-light">
+            &copy; 2022 - VE-FAT.COM -
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $("#ara").submit(function() {
+                $(this).find(":input").filter(function{ return !this.value; }).attr("disabled");
+                return true;
+            });
+
+            $("form").find(":input").prop("disabled", false)
+
+        });
+
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="./js/jsx.js"></script>
+
+</body>
+</html>

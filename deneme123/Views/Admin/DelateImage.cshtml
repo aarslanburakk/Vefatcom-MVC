@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Image>
+@{
+
+    ViewData["Title"] = "Vefat Resim Sil Ve Güncelle";
+    Layout = "~/Views/Shared/Admincss.cshtml";
+
+}
+
+
+<div class="m-5">
+
+    <div class="bg-success text-white m-5 p-4">
+        <h2>Anasaya Resimler</h2>
+    </div>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+
+                    <th>Veren Ad</th>
+                    <th>Veren Soyad</th>
+                    <th>Vefat Resim</th>
+                   
+
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+
+                    <td>@item.VefatAd  </td>
+                    <td>@item.VefatSoyad  </td>
+                    <td> 
+                        @if (item.Picture != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Picture);
+
+                        var img = string.Format("data:image/jpg;base64,{0}", base64);
+
+                        <img src="@img" style="height:80px; width:150px;" alt="..."> 
+                    }
+                        
+                        
+                         
+                        
+                    
+                    
+                    </td>
+                   
+                    <td>
+                        <form asp-action="DeleteImage" method="post">
+                            
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="hidden" name="resim" value="@item.Picture" />
+                            @*<button type="submit" class="btn btn-danger btn-sm">Sil</button>*@
+                            <!-- Button trigger modal -->
+                            <button type="submit"  onclick="return confirm('Silmek İstediğinden Emin Misin ?') " class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Sil
+                            </button>
+
+                            <!-- Modal -->
+                            @*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Vefat Resim Sil</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                           Gerçekten Silmek İstiyor musun ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                            <button type="submit" class="btn btn-primary">Sil</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </form>
+                    </td>
+
+
+                </tr>
+
+
+            }
+
+        </table>
+    </div>
+</div>
